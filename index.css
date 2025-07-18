@@ -1,0 +1,28 @@
+.Container{
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px 50px;
+  grid-template-rows: 400px 60px 30px;
+  column-gap: 5px;
+  row-gap: 5px;
+  grid-template-areas:
+  "header header header header header"
+  "main main . sidebar sidebar"
+  "footer footer footer footer footer"
+}
+.Container > [class*="item"]{
+  border: 2px solid fuchsia;
+  border-radius: 5px;
+}
+
+.item-a {
+  grid-area: header;
+}
+.item-b {
+  grid-area: main;
+}
+.item-c {
+  grid-area: sidebar;
+}
+.item-d {
+  grid-area: footer;
+}
