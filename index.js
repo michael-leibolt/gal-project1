@@ -5,6 +5,7 @@ function randomArtPrimaryImageSmallMaker() {
   return fetch(`${artPieceObjectUrl}`)
     .then((rawResponse) => {
       if (!rawResponse.ok) {
+        alert("please try again!");
         throw new Error("website broke");
       }
       return rawResponse.json();
@@ -15,6 +16,7 @@ function randomArtPrimaryImageSmallMaker() {
         medium: jsonifiedResponse.medium,
         objectID: jsonifiedResponse.objectID,
         url: artPieceObjectUrl,
+        bigPhoto: jsonifiedResponse.primaryImage,
         smallPhoto: jsonifiedResponse.primaryImageSmall,
         department: jsonifiedResponse.department,
         artist: jsonifiedResponse.artistDisplayName,
@@ -29,21 +31,70 @@ function randomArtPrimaryImageSmallMaker() {
 function randParser() {
   return randomArtPrimaryImageSmallMaker()
     .then((artObj) => {
-      console.log("randParser: " + artObj.title);
-      document.getElementById("titlePara").value = artObj.title;
-      return artObj;
-    })
-    .then((artObj) => {
-      console.log("aboutParser: " + artObj.title);
-      document.getElementById(
-        "aboutPara"
-      ).value = `The piece was made by ${artObj.artist}. It was acquired by ${artObj.department} in ${artObj.acquireDate}.`;
-      return artObj;
+      console.log("TitleParser: " + artObj.title);
+      console.log("Da url: " + artObj.url);
+      if (artObj.title.trim() === "") {
+        console.log("title does not exist");
+        document.getElementById("titlePara").innerHTML = "No Title";
+        return artObj;
+      } else {
+        document.getElementById("titlePara").innerHTML = artObj.title;
+        return artObj;
+      }
     })
     .then((artObj) => {
       console.log("photoParser: " + artObj.title);
-      document.getElementById("mainPhoto").src = artObj.smallPhoto;
-      return artObj;
+      console.log(artObj.smallPhoto);
+      console.log(artObj.bigPhoto);
+      if (artObj.smallPhoto.trim() === "" && artObj.bigPhoto.trim() === "") {
+        console.log("photo does not exist");
+        document.getElementById("mainPhoto").src =
+          "https://blog.fluidui.com/assets/images/posts/imageedit_1_9273372713.png";
+        document.getElementById("mainPhoto").alt = "Photo does not exist";
+        return artObj;
+      } else if (artObj.smallPhoto.trim() !== "") {
+        document.getElementById("mainPhoto").src = artObj.smallPhoto;
+        return artObj;
+      } else {
+        document.getElementById("mainPhoto").src = artObj.bigPhoto;
+        return artObj;
+      }
+    })
+    .then((artObj) => {
+      console.log(
+        "Artist: " +
+          artObj.artist +
+          "Department: " +
+          artObj.department +
+          "Date: " +
+          artObj.acquireDate
+      );
+      if (artObj.artist.trim() === "") {
+        document.getElementById("tableArtist").innerText = "Unknown Artist";
+        return artObj;
+      } else {
+        document.getElementById("tableArtist").innerText = artObj.artist;
+        return artObj;
+      }
+    })
+    .then((artObj) => {
+      if (artObj.department.trim() === "") {
+        document.getElementById("tableDepartment").innerText =
+          "Unknown Department";
+        return artObj;
+      } else {
+        document.getElementById("tableDepartment").innerText =
+          artObj.department;
+        return artObj;
+      }
+    })
+    .then((artObj) => {
+      if (artObj.acquireDate.trim() === "") {
+        document.getElementById("tableDate").innerText = "Unknown Date";
+      } else {
+        document.getElementById("tableDate").innerText = artObj.acquireDate;
+        return artObj;
+      }
     })
     .catch((error) => {
       console.error("Error: ", error);
@@ -51,56 +102,3 @@ function randParser() {
 }
 
 randParser();
-
-// function randParser() {
-//   return randomArtPrimaryImageSmallMaker()
-//     .then((artObj) => {
-//       console.log("randParser: " + artObj.title);
-//       return `The piece is '${artObj.title}'`;
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//     });
-// }
-
-// function aboutParser() {
-//   return randomArtPrimaryImageSmallMaker()
-//     .then((artObj) => {
-//       console.log("aboutParser: " + artObj.title);
-//       return (
-//         `The piece was made by ${artObj.artist}.` +
-//         ` It was acquired by ${artObj.department} in ${artObj.acquireDate}.`
-//       );
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//     });
-// }
-
-// function photoParser() {
-//   return randomArtPrimaryImageSmallMaker()
-//   .then((artObj) => {
-//     console.log("photoParser: " + artObj.title);
-//     return artObj.smallPhoto;
-//   });
-// }
-
-// async function updateTitlePara() {
-//   let titleParagraph = await randParser();
-//   document.getElementById("titlePara").value = titleParagraph;
-// }
-
-// async function updateAboutPara() {
-//   let aboutParagraph = await aboutParser();
-//   document.getElementById("aboutPara").value = aboutParagraph;
-// }
-
-// async function updatePhoto() {
-//   let mainPhoto = await photoParser();
-//   console.log(mainPhoto);
-//   document.getElementById("mainPhoto").src = mainPhoto;
-// }
-
-// updateTitlePara();
-// updateAboutPara();
-// updatePhoto();
