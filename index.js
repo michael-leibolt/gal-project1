@@ -102,10 +102,6 @@ function randParser() {
 }
 randParser();
 
-const finderModes = document.querySelector("#finderModes");
-const topperButton2 = document.querySelector("#topperButton2");
-topperButton2.addEventListener("click", () => randParser());
-
 // finderModes.addEventListener("change", () => {
 //   console.log(finderModes.value);
 //   if (finderModes.value === "Random") {
@@ -126,14 +122,34 @@ topperButton2.addEventListener("click", () => randParser());
 //   }
 // });
 
-async function dropdownHandler() {
-  if (finderModes.value === "Random") {
-    console.log("dropdown value equals " + finderModes.value);
-  } else if (finderModes.value === "ObjectId") {
-    console.log("dropdown value equals " + finderModes.value);
+async function addElement() {
+  if (finderModes.value === "ObjectId") {
+    let objectId = document.createElement("input");
+    let objectIdSubmit = document.createElement("button");
+    objectId.placeholder = "Which Art Id would you like next?";
+    objectId.id = "objectIdInput";
+    document.getElementById("top").after(objectId);
+    console.log("made it to the end");
+  } else if (finderModes.value !== "ObjectId") {
+    document.getElementById("objectIdInput").remove();
+    console.log("removed the input box");
   }
-  let waiting = await randomArtPrimaryImageSmallMaker();
-  console.log(waiting.title);
 }
 
-finderModes.addEventListener("change", dropdownHandler);
+const finderModes = document.querySelector("#finderModes");
+const topperButton2 = document.querySelector("#topperButton2");
+topperButton2.addEventListener("click", () => randParser());
+finderModes.addEventListener("change", () => {
+  console.log(finderModes.value);
+  addElement();
+});
+
+// async function dropdownHandler() {
+//   if (finderModes.value === "Random") {
+//     console.log("dropdown value equals " + finderModes.value);
+//   } else if (finderModes.value === "ObjectId") {
+//     console.log("dropdown value equals " + finderModes.value);
+//   }
+//   let waiting = await randomArtPrimaryImageSmallMaker();
+//   console.log(waiting.title);
+// }
