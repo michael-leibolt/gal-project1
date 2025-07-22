@@ -163,10 +163,6 @@ table {
   overflow-wrap: break-word;
 }
 
-#aboutPara {
-  font-size: large;
-}
-
 #mainPhoto {
   max-width: 100%;
   max-height: 725px;
