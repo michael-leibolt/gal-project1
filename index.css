@@ -18,10 +18,20 @@ body {
 
 #title {
   grid-area: header;
+  font-size: 70px;
+}
+
+#objectIdInput,
+#objectIdSubmit {
+  font-size: 25px;
 }
 
 #objectIdInput {
-  font-size: 25px;
+  width: 400px;
+}
+
+#objectIdSubmit {
+  background-color: #dcba82;
 }
 
 .topperButton {
@@ -159,7 +169,7 @@ table {
 
 #mainPhoto {
   max-width: 100%;
-  max-height: auto;
+  max-height: 725px;
   min-width: 250px;
   min-height: auto;
 }

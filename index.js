@@ -31,10 +31,10 @@ function randomArtPrimaryImageSmallMaker() {
 function randParser() {
   return randomArtPrimaryImageSmallMaker()
     .then((artObj) => {
-      console.log("TitleParser: " + artObj.title);
-      console.log("Da url: " + artObj.url);
+      //console.log("TitleParser: " + artObj.title);
+      //console.log("Da url: " + artObj.url);
       if (artObj.title.trim() === "") {
-        console.log("title does not exist");
+        //console.log("title does not exist");
         document.getElementById("titlePara").innerHTML = "No Title";
         return artObj;
       } else {
@@ -43,13 +43,13 @@ function randParser() {
       }
     })
     .then((artObj) => {
-      console.log("photoParser: " + artObj.title);
-      console.log(artObj.smallPhoto);
-      console.log(artObj.bigPhoto);
+      //console.log("photoParser: " + artObj.title);
+      //console.log(artObj.smallPhoto);
+      //console.log(artObj.bigPhoto);
       if (artObj.smallPhoto.trim() === "" && artObj.bigPhoto.trim() === "") {
-        console.log("photo does not exist");
+        //console.log("photo does not exist");
         document.getElementById("mainPhoto").src =
-          "https://blog.fluidui.com/assets/images/posts/imageedit_1_9273372713.png";
+          "https://image.similarpng.com/file/similarpng/very-thumbnail/2021/06/Art-empty-frame-in-golden-on-transparent-background-PNG.png";
         document.getElementById("mainPhoto").alt = "Photo does not exist";
         return artObj;
       } else if (artObj.smallPhoto.trim() !== "") {
@@ -61,14 +61,14 @@ function randParser() {
       }
     })
     .then((artObj) => {
-      console.log(
-        "Artist: " +
-          artObj.artist +
-          "Department: " +
-          artObj.department +
-          "Date: " +
-          artObj.acquireDate
-      );
+      //console.log(
+      //   "Artist: " +
+      //     artObj.artist +
+      //     "Department: " +
+      //     artObj.department +
+      //     "Date: " +
+      //     artObj.acquireDate
+      // );
       if (artObj.artist.trim() === "") {
         document.getElementById("tableArtist").innerText = "Unknown Artist";
         return artObj;
@@ -102,54 +102,36 @@ function randParser() {
 }
 randParser();
 
-// finderModes.addEventListener("change", () => {
-//   console.log(finderModes.value);
-//   if (finderModes.value === "Random") {
-//     topperButton2.removeEventListener("click", () => {
-//       console.log("removed rand event listener");
-//       randParser();
-//     });
-//     topperButton2.addEventListener("click", () => randParser());
-//   }
-//   if (finderModes.value === "ObjectId") {
-//     topperButton2.removeEventListener("click", () => {
-//       console.log("removed rand event listener");
-//       randParser();
-//     });
-//     topperButton2.addEventListener("click", () => {
-//       console.log(randomArtPrimaryImageSmallMaker().objectID);
-//     });
-//   }
-// });
-
-async function addElement() {
+function addElement() {
   if (finderModes.value === "ObjectId") {
     let objectId = document.createElement("input");
     let objectIdSubmit = document.createElement("button");
+
     objectId.placeholder = "Which Art Id would you like next?";
     objectId.id = "objectIdInput";
+    objectIdSubmit.innerHTML = "Submit";
+    objectIdSubmit.id = "objectIdSubmit";
+    objectIdSubmit.setAttribute("onclick", "logger()");
     document.getElementById("top").after(objectId);
-    console.log("made it to the end");
+    document.getElementById("objectIdInput").after(objectIdSubmit);
+    //console.log("made it to the end");
   } else if (finderModes.value !== "ObjectId") {
     document.getElementById("objectIdInput").remove();
-    console.log("removed the input box");
+    //console.log("removed the input box");
+    document.getElementById("objectIdSubmit").remove();
+    //console.log("removed the input box submit button");
   }
 }
 
 const finderModes = document.querySelector("#finderModes");
 const topperButton2 = document.querySelector("#topperButton2");
+
 topperButton2.addEventListener("click", () => randParser());
 finderModes.addEventListener("change", () => {
   console.log(finderModes.value);
   addElement();
 });
 
-// async function dropdownHandler() {
-//   if (finderModes.value === "Random") {
-//     console.log("dropdown value equals " + finderModes.value);
-//   } else if (finderModes.value === "ObjectId") {
-//     console.log("dropdown value equals " + finderModes.value);
-//   }
-//   let waiting = await randomArtPrimaryImageSmallMaker();
-//   console.log(waiting.title);
-// }
+function logger() {
+  console.log(document.getElementById("objectIdInput").value);
+}
