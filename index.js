@@ -100,5 +100,40 @@ function randParser() {
       console.error("Error: ", error);
     });
 }
-
 randParser();
+
+const finderModes = document.querySelector("#finderModes");
+const topperButton2 = document.querySelector("#topperButton2");
+topperButton2.addEventListener("click", () => randParser());
+
+// finderModes.addEventListener("change", () => {
+//   console.log(finderModes.value);
+//   if (finderModes.value === "Random") {
+//     topperButton2.removeEventListener("click", () => {
+//       console.log("removed rand event listener");
+//       randParser();
+//     });
+//     topperButton2.addEventListener("click", () => randParser());
+//   }
+//   if (finderModes.value === "ObjectId") {
+//     topperButton2.removeEventListener("click", () => {
+//       console.log("removed rand event listener");
+//       randParser();
+//     });
+//     topperButton2.addEventListener("click", () => {
+//       console.log(randomArtPrimaryImageSmallMaker().objectID);
+//     });
+//   }
+// });
+
+async function dropdownHandler() {
+  if (finderModes.value === "Random") {
+    console.log("dropdown value equals " + finderModes.value);
+  } else if (finderModes.value === "ObjectId") {
+    console.log("dropdown value equals " + finderModes.value);
+  }
+  let waiting = await randomArtPrimaryImageSmallMaker();
+  console.log(waiting.title);
+}
+
+finderModes.addEventListener("change", dropdownHandler);

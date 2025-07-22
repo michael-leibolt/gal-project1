@@ -1,7 +1,15 @@
 # gal-project1
+
 # Art Finder using metmuseum API
 
+## Startup:
+
+1. Download project into a Node environment.
+
+2. Execute 'npm start' command in CLI.
+
 ## Goals:
+
 1. Be able to load with a random piece of art \n
 
 2. Input a 'lucky number' to get your art (based off of the ObjectId's from the API)

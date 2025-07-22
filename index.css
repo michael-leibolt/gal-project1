@@ -17,16 +17,14 @@ body {
   grid-area: header;
 }
 
-#topperButton {
+.topperButton {
   grid-area: button1;
   background-color: #dcba82;
-  font-size: larger;
+  font-size: x-large;
   justify-self: flex-end;
 }
 #topperButton2 {
   grid-area: button2;
-  background-color: #dcba82;
-  font-size: larger;
   justify-self: last baseline;
 }
 

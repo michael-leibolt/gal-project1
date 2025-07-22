@@ -10,14 +10,17 @@
   <body>
     <header class="topper">
       <h1 id="title">ArtFinder</h1>
-      <button id="topperButton">Find New Artwork</button>
-      <button id="topperButton2">Next</button>
+      <select name="SearchTypes" class="topperButton" id="finderModes">
+        <option value="Random" id="random">Random</option>
+        <option value="ObjectId" id="objectId">Object Id</option>
+      </select>
+      <button id="topperButton2" class="topperButton">Next</button>
     </header>
     <div class="spacer"></div>
     <main class="body">
       <section class="item1">
         <div id="artTitle">Title</div>
-        <h2><div id="titlePara"></div></h2>
+        <div id="titlePara"></div>
       </section>
       <section class="item2">
         <div id="info">About the work</div>
